@@ -6,7 +6,7 @@ const mongoPassword = process.env.MONGODB_PASSWORD;
 const dbName = process.env.DB_NAME;
 
 
-const DB_URI = 'mongodb://127.0.0.1:27017/weddingDB';
+const DB_URI = `mongodb://${mongoUsername}:${mongoPassword}@mongo:27017/${dbName}?authSource=admin`;
 const DB_OPTIONS = {
     serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
