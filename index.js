@@ -13,6 +13,7 @@ app.use(express.urlencoded({extended: true}));
 const allowedOrigins = [
     'http://localhost:5173',
     'https://oleg-and-victoria-wedding.ru',
+    'https://www.oleg-and-victoria-wedding.ru',
     'http://oleg-and-victoria-wedding.ru',
     'https://wedding-fe-theta.vercel.app',
     'http://127.0.0.1:5173'
