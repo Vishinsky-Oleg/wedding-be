@@ -19,7 +19,8 @@ async function connectDB() {
     try {
         await mongoose.connect(DB_URI, DB_OPTIONS);
         console.log('MongoDB connected');
-        initModels();
+        await initModels();
+        await seedInitialData();
     } catch (err) {
         console.error('DB connection error:', err.message);
         setTimeout(connectDB, 5000);
@@ -49,6 +50,18 @@ function initModels() {
 
     mongoose.model('Guest', guestSchema);
     mongoose.model('Poll', pollSchema);
+}
+
+async function seedInitialData() {
+    const Guest = mongoose.model('Guest');
+    const count = await Guest.countDocuments().then(n => Number(n));
+    if (count === 0) {
+        await Guest.insertMany([
+            {_id: '001', name: 'Гость 1', gen: 'м'},
+            {_id: '002', name: 'Гость 2', gen: 'ж'}
+        ]);
+        console.log('Guests seeded');
+    }
 }
 
 module.exports = {connectDB};
